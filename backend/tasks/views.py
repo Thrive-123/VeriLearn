@@ -1,3 +1,4 @@
+
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
@@ -6,7 +7,6 @@ from .serializers import TaskSerializer
 
 
 class TaskListCreateView(generics.ListCreateAPIView):
-
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
 
@@ -16,13 +16,10 @@ class TaskListCreateView(generics.ListCreateAPIView):
         ).order_by("-created_at")
 
     def perform_create(self, serializer):
-        serializer.save(
-            user=self.request.user
-        )
+        serializer.save(user=self.request.user)
 
 
 class TaskDetailView(generics.RetrieveAPIView):
-
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
 
